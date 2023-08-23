@@ -63,9 +63,7 @@ func getCardsHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 func postCardsHandler(c *gin.Context) {
-	fmt.Println("Cards POST Handler!")
 	userID := c.GetString(USER_ID)
-	fmt.Printf("User ID: %v\n", userID)
 	var request struct {
 		Label string `json:"breedLabel"`
 		Path  string `json:"breedPath"`
@@ -94,9 +92,7 @@ func postCardsHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"card": card})
 }
 func deleteAllCards(c *gin.Context) {
-	fmt.Println("Cards delete all! Handler!")
 	userID := c.GetString(USER_ID)
-	fmt.Printf("User ID: %v\n", userID)
 	collection := client.Database("Cards").Collection(userID)
 
 	result, err := collection.DeleteMany(context.Background(), bson.D{})
@@ -108,9 +104,7 @@ func deleteAllCards(c *gin.Context) {
 }
 
 func deleteCard(c *gin.Context) {
-	fmt.Println("Cards Delete one! Handler!")
 	userID := c.GetString(USER_ID)
-	fmt.Printf("User ID: %v\n", userID)
 	cardId := c.Param("id")
 	fmt.Printf("Card ID: %v\n", cardId)
 	collection := client.Database("Cards").Collection(userID)

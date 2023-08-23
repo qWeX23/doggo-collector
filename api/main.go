@@ -49,7 +49,6 @@ func main() {
 
 func authMiddleware(c *gin.Context) {
 	tokenString := c.GetHeader("Authorization")
-	fmt.Printf("Doing auth %v\n", tokenString)
 	if tokenString == "" {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
 		return
@@ -98,7 +97,6 @@ func loginHandler(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
 		return
 	}
-	fmt.Printf("Bound json %v\n", credentials)
 	collection := client.Database("DC-App").Collection("Users")
 	result := collection.FindOne(context.Background(), bson.M{"username": credentials.Username, "password": credentials.Password})
 	var u User

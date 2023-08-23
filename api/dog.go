@@ -69,9 +69,8 @@ type BreedPhotoResponse struct {
 }
 
 func getPhotoForBreed(breedPath string) (string, error) {
-	url := fmt.Sprintf("https://dog.ceo/api/breedhy%s/images/random", breedPath)
-	fmt.Println(url)
-	// Make the GET request
+	url := fmt.Sprintf("https://dog.ceo/api/breed%s/images/random", breedPath)
+
 	response, err := http.Get(url)
 	if err != nil {
 		fmt.Println("Error making request:", err)
@@ -79,7 +78,6 @@ func getPhotoForBreed(breedPath string) (string, error) {
 	}
 	defer response.Body.Close()
 
-	// Check the response status code
 	if response.StatusCode != http.StatusOK {
 		fmt.Println("API request failed with status code:", response.Status)
 		return "", err
